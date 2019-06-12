@@ -29,8 +29,8 @@ client.on("guildDelete", guild => {
   // this event triggers when the bot is removed from a guild.
   console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
 });
-
-client.on('message', message => {
+/*
+client.on('message', async message => {
   // If the message is "how to embed"
   if (message.content === 'lineup') {
     // We can create embeds using the MessageEmbed constructor
@@ -47,8 +47,11 @@ client.on('message', message => {
       //.setDescription('Mansehej \'ShaXd0w\' Singh\nAbhay \'The Darkness\' Kaul\nVaibhav '\vaibharn\' Sharan\nS. M. \'kamiJack\' Aadithya\nRahul \'W1ldcraft\' Subramanyam\nAyush \'Nexus\' Sharma');
     // Send the embed to the same channel as the message
     message.channel.send(embed);
+
+    if()
   }
 });
+*/
 
 client.on("message", async message => {
   // This event will run on every single message received, from any channel or DM.
@@ -68,28 +71,18 @@ client.on("message", async message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
   
-  // Let's go with a few common example commands! Feel free to delete or change those.
-  
   if(command === "ping") {
-    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
-    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip)
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
   if(command === "whosgay") {
-    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
-    // To get the "message" itself we join the `args` back into a string with spaces: 
-    
     message.channel.send("Mik");
   }
   if(command === "whospro") {
-   
     message.channel.send("AstralisIN");
   }
-  if(command === "whoarewe") {
-    
-    
-    message.channel.send("AstralisIN");
+  if(command === "about") {
+    message.channel.send("WE ARE ASTRALIS INDIA");
   }
   if(command === "say") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
@@ -100,7 +93,30 @@ client.on("message", async message => {
     // And we get the bot to say the thing: 
     message.channel.send(sayMessage);
   }
-  
+
+  if (command === 'lineup') {
+    // We can create embeds using the MessageEmbed constructor
+    // Read more about all that you can do with the constructor
+    // over at https://discord.js.org/#/docs/main/stable/class/RichEmbed
+    const desc="Mansehej \'ShaXd0w\' Singh (Captain)\nAbhay \'The Darkness\' Kaul\nVaibhav \'vaibharn\' Sharan\nS. M. \'kamiJack\' Aadithya\nRahul \'W1ldcraft\' Subramanyam"
+    const embed = new RichEmbed()
+      // Set the title of the field
+      .setTitle('Lineup')
+      // Set the color of the embed
+      .setColor(0xFF0000)
+      // Set the main content of the embed
+      .setDescription(desc)
+    // Send the embed to the same channel as the message
+    message.channel.send(embed);
+  }
+    if (command === 'help') {
+      const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay\npurge [int(2-100)]"
+      const embed = new RichEmbed()
+        .setTitle('AstralisIN Discord Bot Commands')
+        .setColor(0xFF0000)
+        .setDescription(desc)
+      message.channel.send(embed);
+  /*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
     // Please read on Array.some() to understand this bit: 
@@ -126,10 +142,10 @@ client.on("message", async message => {
     await member.kick(reason)
       .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
     message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
-
+*/
   }
   
-  if(command === "ban") {
+ /* if(command === "ban") {
     // Most of this command is identical to kick, except that here we'll only let admins do it.
     // In the real world mods could ban too, but this is just an example, right? ;)
     if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
@@ -148,7 +164,7 @@ client.on("message", async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
-  
+  */
   if(command === "purge") {
     // This command removes all messages from all users in the channel, up to 100.
     
@@ -164,6 +180,6 @@ client.on("message", async message => {
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
-});
+  });
 
 client.login(config.token);
