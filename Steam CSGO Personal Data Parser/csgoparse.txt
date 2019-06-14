@@ -1,4 +1,4 @@
-(function ($, contToken, sessionID, showAlertDialog) {
+  (function ($, contToken, sessionID, showAlertDialog) {
   let z;
   function getKey() {
     z = prompt("Please put in your steam API key because this script will call the API to resolve username to steamIDs, type 'skip' to try and use my key");
@@ -6,7 +6,7 @@
     return z;
   }
   getKey();
-  const API_KEY = z === "skip" ? "61302D7F004BF3578957A3A0CBB0C7AC" : z;
+  const API_KEY = z === "skip" ? "29B8C37C8C96DA202CE7ACD07610EA48" : z;
   // -----------
   // Download JS
   function download(data, strFileName, strMimeType) {
@@ -172,7 +172,7 @@
 
   function parsePlayer(_, player) {
     function getMVPs(data) {
-      if (String(data).includes("★")) {
+      if (String(data).includes("?")) {
         return _getNum(data) || 1;
       } else {
         return 0;

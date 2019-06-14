@@ -9,4 +9,7 @@ import pandas as pd
 rawdata = pd.read_json('CSvaibharn.json',encoding='utf8')
 #mapdata = rawdata.sort_values()
 #for matches in data:
-print(rawdata)
+df=rawdata['matches']
+#df=df.sort_values()
+df1=df.sort_values(['map'])
+print(df1)
