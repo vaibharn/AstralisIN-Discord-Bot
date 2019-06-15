@@ -117,15 +117,15 @@ client.on("message", async message => {
     $.getJSON('http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid=76561198093880916', function(data) {
         
       
-        var fact = `Name: ${data.stats_name}<br>
+        const fact = `Name: ${data.stats_name}<br>
                     Value: ${data.stats_value}<br>`
         message.channel.send(fact);
-          }  
+  });    
     }
               
               
     if (command === 'help') {
-      const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay\npurge [int(2-100)]"
+      const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay\nfacts"
       const embed = new RichEmbed()
         .setTitle('AstralisIN Discord Bot Commands')
         .setColor(0xFF0000)
