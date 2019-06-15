@@ -1,0 +1,2 @@
+include csgo-personal-data-collector/csgoparse.js
+include csgo-personal-data-collector/collector.py

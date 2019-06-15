@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: csgo-personal-data-collector
+Version: 1.0.0
+Summary: CSGO Competivite Matchmaking Data Collector
+Home-page: https://github.com/vaibharn/AstralisIN-Discord-Bot
+Author: vaibharn
+Author-email: vaibhav.vaibhavsharan.sharan@gmail.com
+License: UNKNOWN
+Description: # csgo-personal-data-collector
+        This is a PyQt powered GUI based application which will be used to collect Valve Counter Strike:Global Offensive Competitive Matchmaking data according to the GDPR Act.
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
