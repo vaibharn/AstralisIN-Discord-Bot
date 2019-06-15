@@ -98,7 +98,7 @@ client.on("message", async message => {
     // We can create embeds using the MessageEmbed constructor
     // Read more about all that you can do with the constructor
     // over at https://discord.js.org/#/docs/main/stable/class/RichEmbed
-    const desc="Mansehej \'ShaXd0w\' Singh (Captain)\nAbhay \'The Darkness\' Kaul\nVaibhav \'vaibharn\' Sharan\nS. M. \'kamiJack\' Aadithya\nRahul \'W1ldcraft\' Subramanyam"
+    const desc="Mansehej \'ShaXd0w\' Singh (Captain)\nDeveshwar \'Gho$t'\ Manral\nAbhay \'The Darkness\' Kaul\nVaibhav \'vaibharn\' Sharan\nS. M. \'kamiJack\' Aadithya\nRahul \'W1ldcraft\' Subramanyam"
     const embed = new RichEmbed()
       // Set the title of the field
       .setTitle('Lineup')
