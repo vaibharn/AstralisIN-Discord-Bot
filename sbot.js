@@ -112,6 +112,8 @@ client.on("message", async message => {
   
   //fact test
   if(command === 'facts') {
+    
+    message.channel.send("Facts Initialised");
     $.getJSON('http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid=76561198093880916', function(data) {
         
       
@@ -178,7 +180,7 @@ client.on("message", async message => {
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
   */
-  if(command === "purge") {
+  /*if(command === "purge") {
     // This command removes all messages from all users in the channel, up to 100.
     
     // get the delete count, as an actual number.
@@ -192,7 +194,7 @@ client.on("message", async message => {
     const fetched = await message.channel.fetchMessages({limit: deleteCount});
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
-  }
+  }*/
   });
 
 client.login(config.token);
