@@ -77,6 +77,12 @@ client.on("message", async message => {
   if(command === "whosgay") {
     message.channel.send("Mik");
   }
+  if(command === 'thanks') {
+    message.channel.send("My pleasure");
+  }
+  if(command === 'thank you') {
+    message.channel.send("You're welcome");
+  }
   if(command === "whospro") {
     message.channel.send("AstralisIN");
   }
@@ -117,12 +123,147 @@ client.on("message", async message => {
       message.channel.send("Some stats about ShaXd0w: ");
       const fs = require('fs');
       client.msgs = require("./data.json");
-      //if(message.content.startsWith("get")) {
         for(var i=0; i<10; i++) {
         let _namev = client.msgs.playerstats.stats[i].name;
         let _message = client.msgs.playerstats.stats[i].value;
         message.channel.send(_namev +" : " + _message);
       } 
+    }
+
+    function matchv() {
+      'use strict';
+      message.channel.send("Last match data of Vaibharn");
+      const fs = require('fs');
+      client.msgs = require("./Match/CSvaibharn.json");
+
+      for(var i=0; i<1; i++) {
+        let _map = client.msgs.matches[i].map;
+        let _t1s = client.msgs.matches[i].teams.team1.score;
+        let _t2s = client.msgs.matches[i].teams.team2.score;
+        let _result = client.msgs.matches[i].result;
+        message.channel.send("Map : " +_map);
+        message.channel.send("Score : " +_t1s +"-" +_t2s);
+
+        message.channel.send("Playing 5:");
+        for(var j=0; j<5; j++) {
+          let _player = client.msgs.matches[i].teams.team1.players[j].name;
+          //if(_player==='vaibharn')
+          //  continue;
+          let _kills = client.msgs.matches[i].teams.team1.players[j].kills;
+          let _deaths = client.msgs.matches[i].teams.team1.players[j].deaths;
+          let _mvps = client.msgs.matches[i].teams.team1.players[j].mvps;
+          message.channel.send("\n--->   " +_player +" (K:" +_kills + " D: " +_deaths +")");
+        }
+        message.channel.send("Result : " +_result);
+      } 
+    }
+
+    
+    function matchs() {
+      'use strict';
+      message.channel.send("Last match data of ShaXd0w");
+      const fs = require('fs');
+      client.msgs = require("./Match/CSmansehej.json");
+
+      for(var i=0; i<1; i++) {
+        let _map = client.msgs.matches[i].map;
+        let _t1s = client.msgs.matches[i].teams.team1.score;
+        let _t2s = client.msgs.matches[i].teams.team2.score;
+        let _result = client.msgs.matches[i].result;
+        message.channel.send("Map : " +_map);
+        message.channel.send("Score : " +_t1s +"-" +_t2s);
+
+        message.channel.send("Playing 5:");
+        for(var j=0; j<5; j++) {
+          let _player = client.msgs.matches[i].teams.team1.players[j].name;
+          //if(_player==='vaibharn')
+          //  continue;
+          let _kills = client.msgs.matches[i].teams.team1.players[j].kills;
+          let _deaths = client.msgs.matches[i].teams.team1.players[j].deaths;
+          let _mvps = client.msgs.matches[i].teams.team1.players[j].mvps;
+          message.channel.send("\n--->   " +_player +" (K:" +_kills + " D: " +_deaths +")");
+        }
+        message.channel.send("Result : " +_result);
+      } 
+    }
+
+    if(command === 'matchs') {
+      matchs();
+    }
+
+    if(command === 'matchv') {
+        matchv();
+    }
+
+    if(command === 'maps') {
+      'use strict';
+       message.channel.send("Map data of ShaXd0w (Last 1000 matches)");
+      const fs = require('fs');
+      client.msgs = require("./Match/CSmansehej.json");
+      var w_mirage=0, l_mirage=0, p_mirage=0;
+      var w_cache=0, l_cache=0, p_cache=0;
+      var w_overpass=0, l_overpass=0, p_overpass=0;
+      var w_dust2=0, l_dust2=0, p_dust2=0;
+      var w_inferno=0, l_inferno=0, p_inferno=0;
+      var w_train=0, l_train=0, p_train=0;
+      var w_nuke=0, l_nuke=0, p_nuke=0;
+      var w_office=0, l_office=0, p_office=0;
+      var w_vertigo=0, l_vertigo=0, p_vertigo=0;
+      var w_cobblestone=0, l_cobblestone=0;
+      for(var i=0; i<1000; i++) {
+        let _map = client.msgs.matches[i].map;
+        //Mirage
+        if(_map==='Competitive Mirage') {
+          p_mirage++;
+          let _result = client.msgs.matches[i].result;
+          if(_result === 'Loss') {
+            l_mirage++; 
+          }
+          else if(_result === 'Win') {
+            w_mirage++;
+          }
+        }
+        //Cache
+        if(_map==='Competitive Cache') {
+          p_cache++;
+          let _result = client.msgs.matches[i].result;
+          if(_result === 'Loss') {
+            l_cache++; 
+          }
+          else if(_result === 'Win') {
+            w_cache++;
+          }
+        }
+        //Overpass
+        if(_map==='Competitive Overpass') {
+          p_overpass++;
+          let _result = client.msgs.matches[i].result;
+          if(_result === 'Loss') {
+            l_overpass++; 
+          }
+          else if(_result === 'Win') {
+            w_overpass++;
+          }
+        }
+      }
+      message.channel.send("MIRAGE");
+      message.channel.send("Matches played: "+p_mirage);
+      message.channel.send("Matches won: " +w_mirage);
+      message.channel.send("Matches lost: " +l_mirage);
+      message.channel.send("Matches tied: " +(p_mirage-(w_mirage+l_mirage)));
+
+      message.channel.send("CACHE");
+      message.channel.send("Matches played: "+p_cache);
+      message.channel.send("Matches won: " +w_cache);
+      message.channel.send("Matches lost: " +l_cache);
+      message.channel.send("Matches tied: " +(p_cache-(w_cache+l_cache)));
+
+      message.channel.send("OVERPASS");
+      message.channel.send("Matches played: "+p_overpass);
+      message.channel.send("Matches won: " +w_overpass);
+      message.channel.send("Matches lost: " +l_overpass);
+      message.channel.send("Matches tied: " +(p_overpass-(w_overpass+l_overpass)));
+
     }
               
     if (command === 'help') {
@@ -133,6 +274,7 @@ client.on("message", async message => {
         .setDescription(desc)
       message.channel.send(embed);
 
+      
   /*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
