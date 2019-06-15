@@ -109,8 +109,21 @@ client.on("message", async message => {
     // Send the embed to the same channel as the message
     message.channel.send(embed);
   }
+  
+  //fact test
+  if(command === 'facts') {
+    $.getJSON('http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid=76561198093880916', function(data) {
+        
+      
+        var fact = `Name: ${data.stats_name}<br>
+                    Value: ${data.stats_value}<br>`
+        message.channel.send(fact);
+          }  
+    }
+              
+              
     if (command === 'help') {
-      const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay"
+      const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay\npurge [int(2-100)]"
       const embed = new RichEmbed()
         .setTitle('AstralisIN Discord Bot Commands')
         .setColor(0xFF0000)
@@ -164,7 +177,7 @@ client.on("message", async message => {
       .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
     message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
   }
-  
+  */
   if(command === "purge") {
     // This command removes all messages from all users in the channel, up to 100.
     
@@ -180,7 +193,6 @@ client.on("message", async message => {
     message.channel.bulkDelete(fetched)
       .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
   }
-  */
   });
 
 client.login(config.token);
