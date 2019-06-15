@@ -1,6 +1,5 @@
 // Load up the discord.js library
 const { Client, RichEmbed } = require('discord.js');
-
 // This is your client. Some people call it `bot`, some people call it `self`, 
 // some might call it `cootchie`. Either way, when you see `client.something`, or `bot.something`,
 // this is what we're refering to. Your client.
@@ -110,19 +109,21 @@ client.on("message", async message => {
     message.channel.send(embed);
   }
   
-  //fact test
-  if(command === 'facts') {
-    
-    message.channel.send("Facts Initialised");
-    $.getJSON('http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid=76561198093880916', function(data) {
-        
-      
-        const fact = `Name: ${data.stats_name}<br>
-                    Value: ${data.stats_value}<br>`
-        message.channel.send(fact);
-  });    
+ 
+
+    //fact
+    if(command === 'facts') {
+      'use strict';
+      message.channel.send("Some stats about ShaXd0w: ");
+      const fs = require('fs');
+      client.msgs = require("./data.json");
+      //if(message.content.startsWith("get")) {
+        for(var i=0; i<10; i++) {
+        let _namev = client.msgs.playerstats.stats[i].name;
+        let _message = client.msgs.playerstats.stats[i].value;
+        message.channel.send(_namev +" : " + _message);
+      } 
     }
-              
               
     if (command === 'help') {
       const desc="Prefix is +\nping\nwhosgay\nwhospro\nabout\nlineup\nsay\nfacts"
@@ -131,6 +132,7 @@ client.on("message", async message => {
         .setColor(0xFF0000)
         .setDescription(desc)
       message.channel.send(embed);
+
   /*
   if(command === "kick") {
     // This command must be limited to mods and admins. In this example we just hardcode the role names.
