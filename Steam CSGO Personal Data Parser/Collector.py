@@ -43,7 +43,7 @@ class Ui_Form(object):
         self.copyButton.setText(_translate("Form","Copy to Clipboard"))
     
     def link_method(self, Form):
-        webbrowser.open_new_tab('https://steamcommunity.com/id/vaibharn/gcpd/730/?tab=matchhistorycompetitive')
+        webbrowser.open_new_tab('https://steamcommunity.com/login/home/?goto=%2Fmy%2Fgcpd%2F730%2F%3Ftab%3Dmatchhistorycompetitive')
     
     def copy_method(self, Form):
         print("xD still making")
