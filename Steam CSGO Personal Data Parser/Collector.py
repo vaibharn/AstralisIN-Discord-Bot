@@ -3,6 +3,10 @@
 import sys
 from PyQt5 import QtWidgets,QtCore,QtGui
 import webbrowser 
+import pyperclip
+
+f = open("csgoparse.js", "r")
+code = f.read()
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -10,8 +14,7 @@ class Ui_Form(object):
         Form.resize(640,480)
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setGeometry(QtCore.QRect(10, 70, 400, 400))
-        f = open("csgoparse.txt", "r")
-        self.textBrowser.setText(f.read())
+        self.textBrowser.setText(code)
         self.textBrowser.setObjectName("textBrowser")
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(10, 20, 500, 25))
@@ -46,7 +49,7 @@ class Ui_Form(object):
         webbrowser.open_new_tab('https://steamcommunity.com/login/home/?goto=%2Fmy%2Fgcpd%2F730%2F%3Ftab%3Dmatchhistorycompetitive')
     
     def copy_method(self, Form):
-        print("xD still making")
+        pyperclip.copy(code)
         
 class mywindow(QtWidgets.QMainWindow):
     def __init__(self):
