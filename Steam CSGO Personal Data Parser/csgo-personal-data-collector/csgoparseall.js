@@ -1,17 +1,11 @@
   (function ($, contToken, sessionID, showAlertDialog) {
-  let z,rkey;
+  let z;
   function getKey() {
     z = prompt("Please put in your steam API key (https://steamcommunity.com/dev/apikey) because this script will call the API to resolve username to steamIDs, type 'skip' to try and use my key");
     if (!z && z !== "skip") getKey();
     return z;
   }
-  function getMode() {
-    rkey = prompt("Enter number of pages of data to collect");
-    return rkey;
-  }
-  
   getKey();
-  getMode();
   const API_KEY = z === "skip" ? "29B8C37C8C96DA202CE7ACD07610EA48" : z;
   // -----------
   // Download JS
@@ -33,6 +27,8 @@
       b,
       ua,
       fr;
+
+    //if(typeof B.bind === 'function' ){ B=B.bind(self); }
 
     if (String(this) === "true") {
       //reverse arguments, allowing download.bind(true, "text/xml", "export.xml") to act as a callback
@@ -276,7 +272,7 @@
     endData.matches = endData.matches.concat(first8);
   }
 
-  async function getMoreDataRec(token,recInt) {
+  async function getMoreData(token) {
     try {
       const url = `${location.protocol}//${location.host}${
         location.pathname
@@ -287,11 +283,10 @@
       // console.log(res);
       endData.matches = endData.matches.concat(_parseTable(res.html));
       // console.log(res.continue_token);
-      recInt = recInt-1;
-      if (res.continue_token && res.html && res.success &&(recInt>=0)) {
+      if (res.continue_token && res.html && res.success) {
         // console.log(res.continue_token);
         showAlertDialog("Data", `Scraping Data, please be patient. (${res.continue_token})`, "OK");
-        getMoreDataRec(res.continue_token,--recInt);
+        getMoreData(res.continue_token);
       } else {
         return proccessData();
       }
@@ -303,7 +298,7 @@
 
   function getData() {
     parseInitial();
-    getMoreDataRec(requestData.continueToken,rkey);
+    getMoreData(requestData.continueToken);
   }
 
   // to simplify data analysis, some processing needs to be done

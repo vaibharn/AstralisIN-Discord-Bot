@@ -1,9 +1,0 @@
-MANIFEST.in
-README.md
-setup.py
-csgo-personal-data-collector/collector.py
-csgo-personal-data-collector/csgoparse.js
-csgo_personal_data_collector.egg-info/PKG-INFO
-csgo_personal_data_collector.egg-info/SOURCES.txt
-csgo_personal_data_collector.egg-info/dependency_links.txt
-csgo_personal_data_collector.egg-info/top_level.txt
