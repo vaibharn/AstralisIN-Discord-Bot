@@ -115,6 +115,7 @@ client.on("message", async message => {
     message.channel.send(embed);
   }
   
+<<<<<<< Updated upstream
  
 
     //fact
@@ -128,6 +129,55 @@ client.on("message", async message => {
         let _message = client.msgs.playerstats.stats[i].value;
         message.channel.send(_namev +" : " + _message);
       } 
+=======
+  //getSteamID
+  function getSteam(auth){
+    client.msgs = require("./SteamID.json");
+      for(var i=0; i<6; i++) {
+        if(client.msgs.users[i].name===auth) {
+          message.channel.send("Steam ID: " +client.msgs.users[i].steam);
+          return client.msgs.users[i].steam;
+        }
+      }
+      message.channel.send("Only available for Astralis India Members.");
+  }
+
+  if(command==='steam'){
+    var auth = message.author.username;
+    getSteam(auth);
+  }
+
+  //getData
+   function getData(auth){
+    const request=require('request');
+    var url ="http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid="+auth;
+    request(url, {json:true}, (err,res,body) => {
+      let proData=body;
+      client.msgs=proData;
+      for(var i=0; i<10; i++) {
+      let _namev = client.msgs.playerstats.stats[i].name;
+      let _message = client.msgs.playerstats.stats[i].value;
+      message.channel.send(_namev +" : " + _message);
+      } 
+    }
+    )
+  }
+
+
+
+  //new
+
+  //getDataCall
+   function getDataCall() {
+    var auth = message.author.username;
+    var send = getSteam(auth);
+    getData(send);
+  }
+
+  //fact
+   if(command === 'fact') {
+       getDataCall();
+>>>>>>> Stashed changes
     }
 
     function matchv() {
