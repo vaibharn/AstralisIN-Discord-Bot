@@ -74,21 +74,38 @@ client.on("message", async message => {
     const m = await message.channel.send("Ping?");
     m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
   }
+
   if(command === "whosgay") {
     message.channel.send("Mik");
   }
+
   if(command === 'thanks') {
     message.channel.send("My pleasure");
   }
+
   if(command === 'thank you') {
     message.channel.send("You're welcome");
   }
+
   if(command === "whospro") {
     message.channel.send("AstralisIN");
   }
+
+  if(command === "whosnoob") {
+    if(message.author.username==='ShaXd0w')
+      message.channel.send("Everyone except you.");
+    else
+      message.channel.send("You are, " +message.author);
+  }
+
   if(command === "about") {
     message.channel.send("WE ARE ASTRALIS INDIA");
   }
+
+  if(command === 'hello' || command === 'hi' || command === 'yo' || command === 'hey'){
+    message.channel.send('Hey ' + message.author + '!');
+  } 
+  
   if(command === "say") {
     // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
     // To get the "message" itself we join the `args` back into a string with spaces: 
@@ -115,18 +132,63 @@ client.on("message", async message => {
     message.channel.send(embed);
   }
   
- 
+  //getSteamID
+  function getSteam(auth){
+    client.msgs = require("./SteamID.json");
+      for(var i=0; i<6; i++) {
+        if(client.msgs.users[i].name===auth) {
+          message.channel.send("Steam ID: " +client.msgs.users[i].steam);
+          return client.msgs.users[i].steam;
+        }
+      }
+      message.channel.send("Only available for Astralis India Members.");
+  }
 
-    //fact
-    if(command === 'facts') {
-      'use strict';
-      message.channel.send("Some stats about ShaXd0w: ");
+  if(command==='steam'){
+    var auth = message.author.username;
+    getSteam(auth);
+  }
+
+  //getData
+   function getData(auth){
+    const http = require('http');
       const fs = require('fs');
-      client.msgs = require("./data.json");
-        for(var i=0; i<10; i++) {
-        let _namev = client.msgs.playerstats.stats[i].name;
-        let _message = client.msgs.playerstats.stats[i].value;
-        message.channel.send(_namev +" : " + _message);
+      const file = fs.createWriteStream("./data.json");
+      var url = "http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=3E86C7FFBED78E0426C95C4351EC1B0E&steamid="+auth;
+      const request = http.get(url, function(response) {
+      response.pipe(file);
+      
+});
+
+  }
+
+  //getDataCall
+   function getDataCall() {
+    var auth = message.author.username;
+    var send = getSteam(auth);
+     getData(send);
+    message.channel.send('Data retrieved');
+    return 1;
+  }
+
+  //fact
+   if(command === 'fact') {
+       getDataCall();
+      'use strict';
+      if(getSteam(message.author.username)===""){
+        message.channel.send("Only Available for Astralis India Members");
+        return;
+      }
+      message.channel.send("Some stats about : " +message.author);
+      const fs = require('fs');
+      let rawData = fs.readFileSync('./data.json') ;
+      //console.log(rawData);
+      let proData=JSON.parse(rawData);
+      client.msgs=proData;
+      for(var i=0; i<2; i++) {
+      let _namev = client.msgs.playerstats.stats[i].name;
+      let _message = client.msgs.playerstats.stats[i].value;
+      message.channel.send(_namev +" : " + _message);
       } 
     }
 
